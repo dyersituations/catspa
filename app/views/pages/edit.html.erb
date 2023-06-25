@@ -1,0 +1,4 @@
+<%= render 'form' %>
+<%= link_to 'Remove Page', @page,
+  data: { :confirm => 'Are you sure you want to remove this page permanently?' },
+  :method => :delete %>

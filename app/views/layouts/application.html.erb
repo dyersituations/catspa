@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% page_title = ((@page && (@page.path || @page.title)) ? (@page.title ? @page.title : @page.path) : "").upcase %>
+    <title><%= Settings.instance.site_name %><%= !page_title.blank? ? ' - ' + page_title : '' %></title>
+    <meta name="description" content="<%= Settings.instance.meta_description %>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="/<%= Settings.instance.favicon %>" />
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400" rel="stylesheet" type="text/css">
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/user_styles' %>
+  </head>
+  <body>
+    <%= render 'layouts/nav' %>
+    <div id="container">
+      <div class="banner"></div>
+      <section>
+        <%= yield %>
+      </section>
+    </div>
+    <%= render 'layouts/footer' %>
+  </body>
+</html>

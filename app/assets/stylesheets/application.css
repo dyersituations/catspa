@@ -1,0 +1,281 @@
+/*
+  *= require bootstrap.min.css
+  *= require_self
+  *= require_tree .
+*/
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.clear {
+  clear: both;
+}
+
+#nav {
+  min-height: 57px;
+}
+
+#nav .navbar-brand {
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+#nav .navbar-brand:hover {
+  text-decoration: underline;
+}
+
+#nav .nav-item:hover,
+#nav .nav-item.nav-item-active {
+  text-decoration: underline;
+}
+
+#nav .nav-item .nav-link {
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 991px) {
+  #nav .nav-item .nav-link {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+}
+
+.banner {
+  width: 100%;
+}
+
+.banner-thumb {
+  background-position: center;
+  background-size: auto 100%;
+  height: 100px;
+}
+
+.banner-remove {
+  display: block;
+  margin-top: 5px;
+}
+
+.sub-nav.btn-group .btn {
+  border-radius: 0;
+  margin-left: 0;
+  text-transform: uppercase;
+  border: 0;
+}
+
+.sub-nav.btn-group .btn:hover,
+.sub-nav.btn-group .btn.btn-active {
+  text-decoration: underline;
+}
+
+.sub-nav.btn-group .btn:focus,
+.sub-nav.btn-group .btn:focus:active {
+  box-shadow: none;
+}
+
+section {
+  padding: 1rem 0;
+}
+
+#container {
+  flex: 1;
+  overflow-y: auto;
+}
+
+#container > section {
+  width: 1170px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+footer {
+  width: 100%;
+  min-height: 60px;
+  line-height: 60px;
+  padding: 0 1rem;
+}
+
+footer div:last-of-type {
+  font-size: 12px;
+  float: right;
+}
+
+.tox-tinymce {
+  min-height: 600px;
+}
+
+.form-error {
+  padding-bottom: 10px;
+  color: red;
+  font-weight: bold;
+}
+
+.post-show {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-show > div:first-of-type {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.post-show > div:first-of-type h5 {
+  margin: 0 0 0 20px;
+}
+
+.post-show > div:last-of-type img {
+  margin: 0 10px 10px 0;
+  float: left;
+}
+
+.post-show > div:last-of-type .alert,
+.post-show > div:last-of-type #paypal-button-container,
+.post-show > div:last-of-type .spinner-border {
+  margin-top: 20px;
+}
+
+.post-show > div:last-of-type .spinner-border:not(.hidden) {
+  display: inline-block;
+}
+
+.post-show > div:last-of-type #paypal-button-container > div {
+  width: 145px;
+  min-width: 0;
+}
+
+.post-show .post-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-show .post-content .alert {
+  align-self: flex-start;
+  margin-bottom: 5px;
+}
+
+.post-show .post-content .post-price,
+.post-show .post-content .post-quantity {
+  margin-top: 5px;
+}
+  
+.post-show .post-content .post-price {
+  font-weight: bold;
+}
+  
+.post-show .post-content .post-quantity {
+  font-style: italic;
+}
+
+.blog-post {
+  padding-top: 10px;
+}
+
+.blog-post .title {
+  font-size: 1.2em;
+  padding: 10px 10px 10px 90px;
+  min-height: 60px;
+  position: relative;
+  border: 1px solid #ddd;
+  background: #eee;
+}
+
+.blog-post .title .date {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  text-align: center;
+  padding: 6px 2px 2px;
+  width: 70px;
+  height: calc(100% - 10px);
+  border-right: 1px solid #ddd;
+}
+
+.blog-post .title .date .day {
+  font-size: 1.3em;
+}
+
+.blog-post .title .date .month {
+  font-size: 0.6em;
+}
+
+.blog-post .title .text {
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  word-break: break-all;
+}
+
+.blog-post .image {
+  padding: 10px;
+  float: right;
+}
+
+.blog-post > .text {
+  padding: 10px;
+}
+
+.blog-post.alpha {
+  border: 0;
+}
+
+.gallery-empty {
+  padding: 20px 25px;
+}
+
+.gallery-cats {
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.gallery-thumbnail-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 0 -15px;
+  text-align: center;
+}
+
+.gallery-thumbnail-wrapper.small-thumbnail .gallery-thumbnail {
+  width: 234px;
+}
+
+.gallery-thumbnail-wrapper.small-thumbnail .gallery-thumbnail img {
+  width: 204px;
+}
+
+.gallery-thumbnail-wrapper.large-thumbnail {
+  flex-wrap: wrap;
+}
+
+.gallery-thumbnail-wrapper.large-thumbnail img {
+  height: 400px;
+}
+
+.gallery-thumbnail-wrapper .gallery-thumbnail {
+  padding: 15px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9em;
+  display: inline-block;
+}
+
+.gallery-thumbnail-wrapper .gallery-thumbnail a {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}

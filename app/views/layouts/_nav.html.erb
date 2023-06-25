@@ -1,0 +1,19 @@
+<nav id="nav" class="navbar navbar-expand-lg">
+  <%= link_to root_url, :class => 'navbar-brand' do %><%= Settings.instance.site_name %><% end %>
+  <% if @pages.any? %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  <% end %>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <% @pages.each do |page| %>
+        <li class="nav-item <%= @path == page.path.downcase ? "nav-item-active" : "" %>">
+          <%= link_to root_url + page.path, :class => 'nav-link' do %>
+            <%= page.path %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

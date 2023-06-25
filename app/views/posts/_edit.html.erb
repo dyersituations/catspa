@@ -1,0 +1,23 @@
+<h3><%= new_action ? "New Post" : "Edit Posts" %></h3>
+<% if new_action %>
+  <%= render "form", :locals => { :post => @post } %>
+<% else %>
+  <% if @posts.each_with_index do |post, i| %>
+    <% if i > 0 %>
+      <hr />
+    <% end %>
+    <div class="row">
+      <div class="col-12 col-sm-5 form-group">
+        <%= image_tag image_path(post.image.thumb) %>
+      </div>
+      <div class="col-12 col-sm-7 form-group">
+        <%= render "posts/form", :locals => { :post => post } %>
+        <%= link_to "Remove Post", post,
+          :data => { :confirm => "Are you sure you want to remove this image permanently?" },
+          :method => :delete %>
+      </div>
+    </div>
+  <% end.empty? %>
+    No images.
+  <% end %>
+<% end %>

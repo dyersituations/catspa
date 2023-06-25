@@ -1,0 +1,25 @@
+<footer>
+  <% if session[:admin] %>
+    <div class="sub-nav btn-group btn-group-sm">
+      <%= link_to 'Admin', admin_path, :class => 'btn btn-secondary ' + (request.path == admin_path ? "btn-active" : "") %>
+      <%= link_to 'New Page', new_page_path, :class => 'btn btn-secondary ' + (request.path == new_page_path ? "btn-active" : "") %>
+      <% if pages_with_posts.any? %>
+        <%= link_to 'New Post', new_post_path, :class => 'btn btn-secondary ' + (request.path == new_post_path ? "btn-active" : "") %>
+      <% end %>
+      <% if params[:controller] != 'admin' && @page && @page.id %>
+        <%= link_to 'Edit Page', edit_page_path(:id => @page.id), :class => 'btn btn-secondary ' + (request.path == edit_page_path(:id => @page.id) ? "btn-active" : "") %>
+      <% end %>
+      <% if @page && (@page.page_type == Page::PAGE_TYPE[:GALLERY] || @page.page_type == Page::PAGE_TYPE[:BLOG]) %>
+        <%= link_to 'Edit Posts', edit_posts_path(:id => @page.id), :class => 'btn btn-secondary ' + ("#{request.path}?#{request.query_string}" == edit_posts_path(:id => @page.id) ? "btn-active" : "") %>
+      <% end %>
+      <%= link_to 'Log Out', logout_path, :class => 'btn btn-secondary' %>
+    </div>
+  <% end %>
+  <div>
+    All content ©
+    <% if !Settings.instance.copyright_name.to_s.empty? %>
+      <b><%= Settings.instance.copyright_name %></b>
+    <% end %>
+    | Powered by <a href="https://github.com/dyersituations/catcms" target="_blank"><b>CatCMS</b></a>
+  </div>
+</footer>

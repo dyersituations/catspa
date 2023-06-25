@@ -1,0 +1,2 @@
+class EditorImageUploader < BaseUploader
+end

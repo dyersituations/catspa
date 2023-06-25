@@ -1,0 +1,16 @@
+<% if @posts.each do |post| %>
+  <div class="blog-post">
+    <div class="title">
+      <div class="date">
+        <div class="day"><%= post.created_at.strftime("%d") %></div>
+        <div class="month"><%= post.created_at.strftime("%b %Y") %></div>
+      </div>
+      <div class="text"><%= post.title %></div>
+    </div>
+    <div class="image"><%= image_tag image_path(post.image) %></div>
+    <div class="text"><%= simple_format(post.content) %></div>
+    <div class="clear"></div>
+  </div>
+<% end.empty? %>
+  No posts.
+<% end %>

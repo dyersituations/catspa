@@ -1,0 +1,94 @@
+<% is_new = !@page.id %>
+<h3><%= is_new ? 'New' : 'Edit' %> Page</h3>
+<div class="alert alert-danger <%= !notice ? 'hidden' : '' %>"><%= notice %></div>
+<%= form_for @page, :url => is_new ? "/pages/new" : page_path(@page) do |f| %>
+  <%= f.hidden_field :banner_cache %>
+  <%= f.hidden_field :remove_banner %>
+  <div class="row">
+    <div class="col-12 col-sm-4 form-group">
+      <%= f.label :path %>
+      <%= f.text_field :path, :class => 'form-control' %>
+    </div>
+    <div class="col-12 col-sm-4 form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+    <div class="col-12 col-sm-4 form-group">
+      <%= f.label :page_type, "Page Type" %>
+      <%= f.select :page_type, Page::PAGE_TYPE, {}, :class => 'form-control', :onchange => 'onChangePageType(this)' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-4 form-group">
+      <%= f.label :page_type, "Page Order" %>
+      <%= f.select :page_order, @pages.map.with_index { |x, i| [i + 1, i] }, {}, :class => 'form-control' %>
+    </div>
+    <div class="col-12 col-sm-4 form-group">
+      <%= f.label :banner %>
+      <sub>2400 x 300 px</sub>
+      <%= f.file_field :banner, :class => 'form-control-file', :onchange => "onAddBanner()" %>
+      <%= link_to 'Remove Banner', '#', :class => 'banner-remove ' + (@page.banner.present? ? '' : 'hidden'), :onclick => 'onRemoveBanner()' %>
+    </div>
+    <div class="col-12 col-sm-4 form-group">
+      <%= f.label :banner_thumbnail, "Banner Thumbnail" %>
+      <% if @page.banner? %>
+        <div class="banner-thumb" style="background-image: url(<%= @page.banner %>);"></div>
+      <% else %>
+        <div>None</div>
+      <% end %>
+    </div>
+  </div>
+  <div id="gallery-type" class="row <%= @page.page_type == Page::PAGE_TYPE[:GALLERY] ? '' : 'hidden' %>">
+    <div class="col-12 col-sm-6 form-group">
+      <%= f.label :page_sub_type, "Page Sub Type" %>
+      <%= f.select :page_sub_type, Page::PAGE_SUB_TYPE.map { |t| [t[0].to_s.gsub('_', ' '), t[1]] }, {}, :class => 'form-control' %>
+    </div>
+  </div>
+  <div id="content" class="row <%= @page.page_type.nil? || @page.page_type == Page::PAGE_TYPE[:PLAIN] ? '' : 'hidden' %>">
+    <div class="col-12 form-group">
+      <%= f.label :content %>
+      <%= f.text_area :content, :class => "tinymce" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 form-group">
+      <%= link_to 'Cancel', "/page_edit_cancel/#{@page.path}", :class => 'btn btn-secondary' %>
+      <%= button_tag (!@page.id ? 'Create' : 'Save') + ' Page', class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>
+<%= tinymce content_css: [asset_path('common.css'), asset_path('tinymce.css'), "https://fonts.googleapis.com/css?family=Raleway:400"] %>
+<script>
+  function onChangePageType(select) {
+    const pageType = +select.value;
+    const hasContent = pageType === <%= Page::PAGE_TYPE[:PLAIN] %>;
+    const isGallery = pageType === <%= Page::PAGE_TYPE[:GALLERY] %>;
+    $('#content').toggle(hasContent);
+    $('#gallery-type').toggle(isGallery);
+  }
+  
+  function onAddBanner() {
+    hideBannerThumb();
+    toggleBannderRemove(true);
+    setRemoveBanner(false);
+  }
+  
+  function onRemoveBanner() {
+    $('#page_banner').val('');
+    hideBannerThumb();
+    toggleBannderRemove(false);
+    setRemoveBanner(true);
+  }
+  
+  function hideBannerThumb() {
+    $('.banner-thumb').hide();
+  }
+  
+  function toggleBannderRemove(isShow) {
+    $('.banner-remove').toggle(isShow);
+  }
+  
+  function setRemoveBanner(isRemove) {
+    $('#page_remove_banner').val(isRemove);
+  }
+</script>

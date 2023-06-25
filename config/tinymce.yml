@@ -1,0 +1,10 @@
+toolbar:
+  - undo redo | bold italic underline strikethrough | styleselect | alignleft aligncenter alignright alignjustify | outdent indent | uploadimage link | table
+plugins:
+  - image
+  - imagetools
+  - uploadimage
+  - link
+  - table
+height: 600
+image_advtab: true

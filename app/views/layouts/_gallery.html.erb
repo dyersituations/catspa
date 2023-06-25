@@ -1,0 +1,28 @@
+<% is_small = @page.page_sub_type == Page::PAGE_SUB_TYPE[:SMALL_THUMBNAIL] %>
+<% cats = @cats.uniq %>
+<% if cats.length > 1 %>
+  <div class="gallery-cats sub-nav btn-group">
+    <% cats.each_with_index do |cat, index| %>
+      <a href="?category=<%= cat %>" class="btn btn-secondary <%= @cat == cat.downcase ? "btn-active" : "" %>"><%= cat %></a>
+    <% end %>
+  </div>
+<% end %>
+<% if @posts.each_with_index do |post, index| %>
+  <% if is_small ? index % 5 == 0 : index == 0 %>
+    <div class="gallery-thumbnail-wrapper <%= Page::PAGE_SUB_TYPE.key(@page.page_sub_type).to_s.downcase.gsub('_', '-') %>">
+  <% end %>
+  <div class="gallery-thumbnail">
+    <a href="<%= post_path(:id => post.id) %>">
+      <%= image_tag image_path(is_small ? post.image.thumb : post.image) %>
+    </a>
+    <% if Settings.instance.gallery_captions %>
+      <%= post.title.html_safe %>
+    <% end %>
+  </div>
+  <% if is_small && index % 5 == 4 || index == @posts.length - 1 %>
+    </div>
+  <% end %>
+<% end.empty? %>
+<div class="gallery-empty">No images.</div>
+<% end %>
+<div class="clear"></div>
